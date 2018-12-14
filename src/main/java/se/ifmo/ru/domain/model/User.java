@@ -3,6 +3,8 @@ package se.ifmo.ru.domain.model;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -16,6 +18,9 @@ public class User {
     private String login;
     private String password;
     private String name;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Point> points = new ArrayList<>();
 
     private User(){}
 

@@ -15,17 +15,22 @@ public class Point {
     private Double r;
     private boolean inArea;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     private Point() {
     }
 
-    public Point(Double x, Double y, Double r) {
+    public Point(Double x, Double y, Double r, User user) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.inArea = this.IsInArea();
+        this.user = user;
+        this.inArea = this.checkIsInArea();
     }
 
-    private boolean IsInArea() {
+    private boolean checkIsInArea() {
         return ((x >= 0 && x <= r / 2 && y >= 0 && y <= r) ||
                 (x <= 0 && y <= 0 && y > x - r / 2) ||
                 (x <= 0 && y >= 0 && x * x + y * y <= r * r));
@@ -45,6 +50,10 @@ public class Point {
 
     public Double getR() {
         return r;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public boolean isInArea() {

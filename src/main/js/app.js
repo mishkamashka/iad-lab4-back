@@ -10,7 +10,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        client({method: 'GET', path: '/api/points'}).done(response => {
+        client({method: 'GET', path: '/points'}).done(response => {
             this.setState({points: response.entity._embedded.points});
     });
     }

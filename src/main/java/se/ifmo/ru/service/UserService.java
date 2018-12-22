@@ -11,5 +11,5 @@ public interface UserService {
 
     Optional<User> loadById(Long id);
 
-    Optional<List<User>> getAllPoints();
+    Optional<List<User>> getAllUsers();
 }

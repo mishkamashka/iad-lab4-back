@@ -23,7 +23,7 @@ public class UserServiceImlp implements UserService {
         return userRepository.findById(id);
     }
 
-    public Optional<List<User>> getAllPoints() {
+    public Optional<List<User>> getAllUsers() {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users :: add);
         return Optional.of(users);

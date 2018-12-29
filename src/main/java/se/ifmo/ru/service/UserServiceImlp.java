@@ -19,13 +19,26 @@ public class UserServiceImlp implements UserService {
         this.userRepository = userRepository;
     }
 
+    @Override
     public Optional<User> loadById(Long id) {
         return userRepository.findById(id);
     }
 
+    @Override
     public Optional<List<User>> getAllUsers() {
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users :: add);
         return Optional.of(users);
     }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public void delete(User user){
+        userRepository.delete(user);
+    }
+
 }

@@ -12,4 +12,8 @@ public interface UserService {
     Optional<User> loadById(Long id);
 
     Optional<List<User>> getAllUsers();
+
+    User save(User user);
+
+    void delete(User user);
 }

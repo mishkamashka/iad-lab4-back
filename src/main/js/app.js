@@ -4,5 +4,4 @@ const client = require('./client');
 
 class App extends React.Component {
 
-
 }

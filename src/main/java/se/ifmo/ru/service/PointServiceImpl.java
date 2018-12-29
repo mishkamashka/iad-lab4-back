@@ -34,4 +34,14 @@ public class PointServiceImpl implements PointService {
     public Optional<List<Point>> getPointsByUser(User user) {
         return pointRepository.getByUser(user);
     }
+
+    @Override
+    public Point save(Point point) {
+        return pointRepository.save(point);
+    }
+
+    @Override
+    public void delete(Point point) {
+        pointRepository.delete(point);
+    }
 }

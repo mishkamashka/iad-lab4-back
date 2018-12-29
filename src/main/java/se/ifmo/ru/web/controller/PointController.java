@@ -19,7 +19,6 @@ import java.util.Optional;
 public class PointController {
 
     private final PointService pointService;
-
     private final UserService userService;
 
     @Autowired
@@ -44,5 +43,29 @@ public class PointController {
         return points;
     }
 
+    @GetMapping("/new_point_{x}_{y}_{r}_{user_id}")
+    public Point save(@PathVariable("x") Double x, @PathVariable("y") Double y,
+                      @PathVariable("r") Double r, @PathVariable("user_id") Long userId) {
+        Optional<User> optionalUser = userService.loadById(userId);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        return pointService.save(new Point(x, y, r, user));
+    }
 
+    @GetMapping("/delete_{point_id}")
+    public void delete(@PathVariable("point_id") Long pointId) {
+        Optional<Point> optionalPoint = pointService.loadById(pointId);
+        Point point = optionalPoint.isPresent() ? optionalPoint.get() : null;
+        pointService.delete(point);
+    }
+
+    @GetMapping("/list/{user_id}/clear")
+    public List<Point> clearList(@PathVariable("user_id") Long userId) {
+        List<Point> points;
+        Optional<User> optionalUser = userService.loadById(userId);
+        User user = optionalUser.isPresent() ? optionalUser.get() : null;
+        Optional<List<Point>> optionalPoints = pointService.getPointsByUser(user);
+        points = optionalPoints.orElseGet(ArrayList::new);
+        points.forEach(pointService::delete);
+        return points;
+    }
 }

@@ -11,5 +11,4 @@ import java.util.Optional;
 @Repository
 public interface PointRepository extends CrudRepository<Point, Long> {
 
-    Optional<List<Point>> getByUser(User user);
 }

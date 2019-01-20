@@ -15,21 +15,22 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    private String login;
+    private String username;
+
+    @Column
     private String password;
+
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Point> points = new ArrayList<>();
+    private User() {
+    }
 
-    private User(){}
-
-    public User(String login, String password) {
-        this.login = login;
+    public User(String username, String password) {
+        this.username = username;
         this.password = DigestUtils.md5Hex(password);
     }
 
-    public boolean checkPassword(String password){
+    public boolean checkPassword(String password) {
         return this.password.equals(DigestUtils.md5Hex(password));
     }
 
@@ -45,8 +46,8 @@ public class User {
         return id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

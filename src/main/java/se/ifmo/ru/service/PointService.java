@@ -14,10 +14,10 @@ public interface PointService {
 
     Optional<List<Point>> getAllPoints();
 
-    Optional<List<Point>> getPointsByUser(User user);
-
     Point save(Point point);
 
     void delete(Point point);
+
+    void deleteAll();
 
 }

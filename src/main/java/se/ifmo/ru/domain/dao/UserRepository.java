@@ -7,4 +7,6 @@ import se.ifmo.ru.domain.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
 
+    User findByUsername(String username);
+
 }

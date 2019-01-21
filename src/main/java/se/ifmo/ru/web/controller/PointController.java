@@ -1,10 +1,13 @@
 package se.ifmo.ru.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import se.ifmo.ru.domain.model.Point;
 import se.ifmo.ru.domain.model.User;
 import se.ifmo.ru.service.PointService;
@@ -39,20 +42,28 @@ public class PointController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-//    @GetMapping("/new_point_{x}_{y}_{r}_{user_id}")
-//    public Point save(@PathVariable("x") Double x, @PathVariable("y") Double y,
-//                      @PathVariable("r") Double r, @PathVariable("user_id") Long userId) {
-//        Optional<User> optionalUser = userService.loadById(userId);
-//        User user = optionalUser.isPresent() ? optionalUser.get() : null;
-//        return pointService.save(new Point(x, y, r, user));
-//    }
-
-    @GetMapping("/delete_{point_id}")
-    public void delete(@PathVariable("point_id") Long pointId) {
-        Optional<Point> optionalPoint = pointService.loadById(pointId);
-        Point point = optionalPoint.isPresent() ? optionalPoint.get() : null;
-        pointService.delete(point);
+    @CrossOrigin
+    @RequestMapping(value = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> addPoint(@RequestBody Point newPoint, UriComponentsBuilder uriComponentsBuilder) {
+        Point point = new Point(newPoint.getX(), newPoint.getY(), newPoint.getR());
+        pointService.save(point);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(uriComponentsBuilder.path("/api/feedback/{id}").buildAndExpand(point.getId()).toUri());
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Point> getPointById(@PathVariable Long id) {
+        return pointService.loadById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+//    @GetMapping("/delete_{point_id}")
+//    public void delete(@PathVariable("point_id") Long pointId) {
+//        Optional<Point> optionalPoint = pointService.loadById(pointId);
+//        Point point = optionalPoint.isPresent() ? optionalPoint.get() : null;
+//        pointService.delete(point);
+//    }
 
 //    @GetMapping("/list/{user_id}/clear")
 //    public List<Point> clearList(@PathVariable("user_id") Long userId) {

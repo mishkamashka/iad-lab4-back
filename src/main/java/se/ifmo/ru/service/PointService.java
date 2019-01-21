@@ -14,7 +14,7 @@ public interface PointService {
 
     Optional<List<Point>> getAllPoints();
 
-    Point save(Point point);
+    void save(Point point);
 
     void delete(Point point);
 

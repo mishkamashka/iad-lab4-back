@@ -31,17 +31,17 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public Optional<List<Point>> getPointsByUser(User user) {
-        return pointRepository.getByUser(user);
-    }
-
-    @Override
-    public Point save(Point point) {
-        return pointRepository.save(point);
+    public void save(Point point) {
+         pointRepository.save(point);
     }
 
     @Override
     public void delete(Point point) {
         pointRepository.delete(point);
+    }
+
+    @Override
+    public void deleteAll() {
+        pointRepository.deleteAll();
     }
 }

@@ -23,6 +23,12 @@ public class RegistrationController {
     @RequestMapping("/login")
     public String login() { return "login"; }
 
+    @RequestMapping("/logout")
+    public String logout() {
+        //this.role = anonymous;
+        return "index";
+    }
+
     @RequestMapping("/registration")
     public String registration() {return "registration"; }
 

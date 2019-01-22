@@ -58,6 +58,12 @@ public class PointController {
         return pointService.loadById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/{radius}", method = RequestMethod.PUT)
+    public  ResponseEntity<Void> updatePointsRadius(@PathVariable double radius) {
+        pointService.updatePointsRadius(radius);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 //    @GetMapping("/delete_{point_id}")
 //    public void delete(@PathVariable("point_id") Long pointId) {
 //        Optional<Point> optionalPoint = pointService.loadById(pointId);

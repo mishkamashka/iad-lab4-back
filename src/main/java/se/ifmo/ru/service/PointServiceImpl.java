@@ -41,6 +41,17 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
+    public void updatePointsRadius(double radius) {
+        List<Point> points = new ArrayList<>();
+        pointRepository.findAll().forEach(points::add);
+        for (Point point : points) {
+            point.setR(radius);
+            point.setInArea(point.checkIsInArea());
+            pointRepository.save(point);
+        }
+    }
+
+    @Override
     public void deleteAll() {
         pointRepository.deleteAll();
     }

@@ -13,6 +13,7 @@ import se.ifmo.ru.domain.model.Point;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * This class is designed for filling the database
@@ -34,12 +35,15 @@ public class FillPointsDatabase {
     @Transactional
     @Commit
     public void fillDb() {
+        double[] array = {0.5, 1, 1.5, 2};
+        int rnd = new Random().nextInt(array.length);
+
         for (int i = 0; i < RECORDS_COUNT; i++) {
             Faker faker = new Faker();
             pointRepository.save(new Point(
                     Double.valueOf(faker.commerce().price(-2, 2)),
                     Double.valueOf(faker.commerce().price(-3, 5)),
-                    Double.valueOf(faker.commerce().price(0.5, 2))
+                    array[rnd]
             ));
         }
     }

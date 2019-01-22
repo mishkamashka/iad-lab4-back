@@ -18,6 +18,8 @@ public interface PointService {
 
     void delete(Point point);
 
+    void updatePointsRadius(double radius);
+
     void deleteAll();
 
 }

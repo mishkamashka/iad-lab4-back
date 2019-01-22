@@ -10,9 +10,16 @@ public class Point {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column
     private Double x;
+
+    @Column
     private Double y;
+
+    @Column
     private Double r;
+
+    @Column
     private boolean inArea;
 
     private Point() {
@@ -25,7 +32,7 @@ public class Point {
         this.inArea = this.checkIsInArea();
     }
 
-    private boolean checkIsInArea() {
+    public boolean checkIsInArea() {
         return ((x >= 0 && x <= r / 2 && y >= 0 && y <= r) ||
                 (x <= 0 && y <= 0 && y >= x - r / 2) ||
                 (x <= 0 && y >= 0 && x * x + y * y <= r * r));
@@ -45,6 +52,14 @@ public class Point {
 
     public Double getR() {
         return r;
+    }
+
+    public void setR(Double r) {
+        this.r = r;
+    }
+
+    public void setInArea(boolean inArea) {
+        this.inArea = inArea;
     }
 
     public boolean isInArea() {

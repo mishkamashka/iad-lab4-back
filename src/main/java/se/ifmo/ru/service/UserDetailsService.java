@@ -1,10 +1,12 @@
 package se.ifmo.ru.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.ifmo.ru.domain.dao.UserRepository;
 
@@ -25,7 +27,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         if (person == null) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }
-        return new User(username, "password", getGrantedAuthorities(username));
+        return new User(username, passwordEncoder().encode("password"), getGrantedAuthorities(username));
     }
 
     private Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {
@@ -36,5 +38,10 @@ public class UserDetailsService implements org.springframework.security.core.use
             authorities = asList(() -> "ROLE_BASIC");
         }
         return authorities;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

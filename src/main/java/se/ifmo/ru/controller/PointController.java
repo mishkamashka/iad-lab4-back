@@ -30,6 +30,7 @@ public class PointController {
     }
 
     @CrossOrigin
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Point>> getAllPoints() {
 //        TODO: should i check current user profile?

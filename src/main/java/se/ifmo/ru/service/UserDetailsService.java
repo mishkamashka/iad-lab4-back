@@ -27,13 +27,15 @@ public class UserDetailsService implements org.springframework.security.core.use
         if (person == null) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }
-        return new User(username, passwordEncoder().encode("password"), getGrantedAuthorities(username));
+        return new User(username, passwordEncoder().encode(person.getPassword()), getGrantedAuthorities(username));
     }
 
     private Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {
         Collection<? extends GrantedAuthority> authorities;
-        if (username.equals("martin")) {
-            authorities = asList(() -> "ROLE_ADMIN", () -> "ROLE_BASIC");
+        if (username.equals("mariia")) {
+            authorities = asList(() -> "ROLE_ADMIN", () -> "ROLE_OTHER", () -> "ROLE_BASIC");
+        } else if (username.equals("username")) {
+            authorities = asList(() -> "ROLE_OTHER");
         } else {
             authorities = asList(() -> "ROLE_BASIC");
         }

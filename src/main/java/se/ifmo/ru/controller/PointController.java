@@ -62,7 +62,7 @@ public class PointController {
 
     @CrossOrigin
     @RequestMapping(value = "/{radius}", method = RequestMethod.PUT)
-    public  ResponseEntity<Void> updatePointsRadius(@PathVariable double radius) {
+    public ResponseEntity<Void> updatePointsRadius(@PathVariable double radius) {
         pointService.updatePointsRadius(radius);
         return new ResponseEntity<>(HttpStatus.OK);
     }

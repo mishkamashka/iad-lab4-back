@@ -27,7 +27,6 @@ public class RegistrationController {
 
     @RequestMapping("/logout")
     public String logout() {
-        //this.role = anonymous;
         return "index";
     }
 

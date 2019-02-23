@@ -1,4 +1,4 @@
-package se.ifmo.ru.web.controller;
+package se.ifmo.ru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

@@ -1,4 +1,4 @@
-package se.ifmo.ru.web.controller;
+package se.ifmo.ru.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -32,9 +32,9 @@ public class RegistrationController {
         this.userService = userService;
     }
 
-    @PreAuthorize("hasRole('ROLE_OTHER')")
-    @RequestMapping("/login")
-    public ResponseEntity<String> login() { return new ResponseEntity<>("login", HttpStatus.OK); }
+//    @PreAuthorize("hasRole('ROLE_OTHER')")
+//    @RequestMapping("/login")
+//    public ResponseEntity<String> login() { return new ResponseEntity<>("login", HttpStatus.OK); }
 
     @RequestMapping("/registration")
     public ResponseEntity<String> registration() {return new ResponseEntity<>("registration", HttpStatus.OK); }

@@ -27,7 +27,7 @@ public class UserDetailsService implements org.springframework.security.core.use
         if (person == null) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }
-        return new User(username, passwordEncoder().encode(person.getPassword()), getGrantedAuthorities(username));
+        return new User(username, "{noop}"+person.getPassword(), getGrantedAuthorities(username));
     }
 
     private Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {
@@ -42,8 +42,4 @@ public class UserDetailsService implements org.springframework.security.core.use
         return authorities;
     }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

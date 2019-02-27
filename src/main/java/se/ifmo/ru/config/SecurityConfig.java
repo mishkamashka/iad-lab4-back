@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
 
-//    @Bean
+    //    @Bean
 //    public PasswordEncoder encoder() {
 //        return new BCryptPasswordEncoder();
 //    }
@@ -46,15 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).and().authenticationProvider(authenticationProvider());
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().authenticated().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.NEVER);
     }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring();
-    }
+
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring();
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -63,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        authenticationProvider.setPasswordEncoder(encoder());
         return authenticationProvider;
     }
+
 
     @Override
     @Bean

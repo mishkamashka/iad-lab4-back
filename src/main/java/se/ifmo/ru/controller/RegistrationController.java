@@ -36,6 +36,9 @@ public class RegistrationController {
 //    @RequestMapping("/login")
 //    public ResponseEntity<String> login() { return new ResponseEntity<>("login", HttpStatus.OK); }
 
+    @RequestMapping("/check")
+    public ResponseEntity<String> check() {return new ResponseEntity<>("registration", HttpStatus.OK); }
+
     @RequestMapping("/registration")
     public ResponseEntity<String> registration() {return new ResponseEntity<>("registration", HttpStatus.OK); }
 

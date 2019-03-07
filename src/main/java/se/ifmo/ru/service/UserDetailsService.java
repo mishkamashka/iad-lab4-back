@@ -21,13 +21,12 @@ public class UserDetailsService implements org.springframework.security.core.use
     private UserRepository personRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws
-            UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         se.ifmo.ru.domain.model.User person = personRepository.findByUsername(username);
         if (person == null) {
             throw new UsernameNotFoundException("Username " + username + " not found");
         }
-        return new User(username, "{noop}"+person.getPassword(), getGrantedAuthorities(username));
+        return new User(username, "{noop}" + person.getPassword(), getGrantedAuthorities(username));
     }
 
     private Collection<? extends GrantedAuthority> getGrantedAuthorities(String username) {

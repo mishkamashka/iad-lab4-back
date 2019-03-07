@@ -17,7 +17,6 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     private String clientid = "$2a$10$pQFTZF9wGiNj/rJr8vcvC.fzH9ua1yngB5LGmSsNHtYpZGG8gpR2G";
     private String clientSecret = "{noop}$2a$10$pQFTZF9wGiNj/rJr8vcvC.fzH9ua1yngB5LGmSsNHtYpZGG8gpR2G";
-    //    private String privateKey = "private key";
     private String publicKey = "{noop}$2a$10$pQFTZF9wGiNj/rJr8vcvC.fzH9ua1yngB5LGmSsNHtYpZGG8gpR2G";
 
     @Autowired

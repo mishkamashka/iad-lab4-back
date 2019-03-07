@@ -33,7 +33,6 @@ public class PointController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Point>> getAllPoints() {
-//        TODO: should i check current user profile?
         return pointService.getAllPoints().map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
